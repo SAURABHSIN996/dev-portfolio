@@ -3,6 +3,10 @@ import { type NextRequest, NextResponse } from "next/server";
 
 // Strapi fires webhooks with event names like "entry.publish", "entry.update", "entry.delete".
 // Set a custom header "x-strapi-secret" in the Strapi webhook config.
+export async function GET() {
+  return NextResponse.json({ ok: true });
+}
+
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-strapi-secret");
   if (secret !== process.env.STRAPI_WEBHOOK_SECRET) {
