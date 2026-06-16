@@ -259,6 +259,12 @@ export default async function HomePage() {
               </a>
             ))}
           </div>
+          <Link href="/archive" className="resume-link" style={{ marginTop: "20px" }}>
+            View full project archive
+            <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <path d="M2.5 9.5 9.5 2.5M5.5 2.5H9.5V6.5" />
+            </svg>
+          </Link>
         </section>
 
         {/* STACK */}
