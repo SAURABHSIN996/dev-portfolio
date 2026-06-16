@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Input } from "./ui/input";
 
 export function SearchBar() {
   const [open, setOpen] = useState(false);

@@ -9,8 +9,8 @@ const links = [
 export function MainNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-sm">
-      <nav className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link href="/" className="font-mono text-base font-bold tracking-tight text-foreground">
+      <nav className="max-w-[1400px] mx-auto px-10 h-14 flex items-center justify-between">
+        <Link href="/" className="font-sans text-base font-bold tracking-tight text-foreground">
           sawcodes
         </Link>
         <ul className="hidden sm:flex items-center gap-8">
@@ -18,7 +18,7 @@ export function MainNav() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font-mono text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
+                className="font-sans text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
               </Link>

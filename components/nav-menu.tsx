@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "./ui/button";
 
 type NavLink = { href: string; label: string };
 
@@ -11,14 +10,13 @@ export function NavMenu({ links }: { links: NavLink[] }) {
 
   return (
     <div className="sm:hidden">
-      <Button
-        variant="ghost"
-        size="sm"
+      <button
         onClick={() => setOpen((o) => !o)}
         aria-label="Toggle menu"
+        className="p-1.5 text-muted-foreground hover:text-foreground transition-colors"
       >
         <span className="text-lg">{open ? "✕" : "☰"}</span>
-      </Button>
+      </button>
 
       {open && (
         <div className="absolute top-16 left-0 right-0 border-b bg-background px-4 py-4 space-y-3">
