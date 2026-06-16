@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pagefind --source .next",
-    "pagefind": "pagefind --source .next",
+    "build": "next build && pagefind --site .next",
+    "pagefind": "pagefind --site .next",
     "start": "next start",
     "lint": "next lint"
   },
