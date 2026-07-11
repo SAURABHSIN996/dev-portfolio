@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${geistMono.variable} ${ebGaramond.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${geistMono.variable} ${ebGaramond.variable}`} suppressHydrationWarning>
       <head>
         {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
           <script

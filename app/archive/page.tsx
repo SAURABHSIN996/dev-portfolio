@@ -2,108 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Project Archive",
-  description: "A chronological list of all projects I've built.",
+  title: "Projects",
+  description: "The projects I build and ship — with the engineering behind them.",
 };
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const archiveProjects = [
   {
-    year: "2024",
-    title: "AI Research Agent",
-    madeAt: "Personal",
-    builtWith: ["LangGraph", "Python", "OpenAI API", "Pinecone"],
-    url: "#",
-    githubUrl: "#",
-  },
-  {
-    year: "2024",
-    title: "Workflow Automation Platform",
-    madeAt: "Tech Startup",
-    builtWith: ["Next.js", "FastAPI", "PostgreSQL", "LangChain"],
-    url: "#",
-    githubUrl: null,
-  },
-  {
-    year: "2023",
-    title: "AI Adoption Toolkit",
-    madeAt: "Tech Startup",
-    builtWith: ["TypeScript", "Anthropic Claude", "Node.js", "Docker"],
-    url: "#",
-    githubUrl: "#",
-  },
-  {
-    year: "2023",
-    title: "Multi-tenant SaaS Dashboard",
-    madeAt: "Tech Startup",
-    builtWith: ["Next.js", "PostgreSQL", "Tailwind CSS", "Stripe"],
-    url: null,
-    githubUrl: null,
-  },
-  {
-    year: "2023",
-    title: "Portfolio & Blog",
-    madeAt: "Personal",
-    builtWith: ["Next.js", "Strapi", "Vercel", "Pagefind"],
-    url: "/",
-    githubUrl: "https://github.com/SAURABHSIN996",
-  },
-  {
-    year: "2022",
-    title: "Real-time Collaboration Tool",
-    madeAt: "Digital Agency",
-    builtWith: ["React", "WebSockets", "Node.js", "Redis"],
-    url: null,
-    githubUrl: "#",
-  },
-  {
-    year: "2022",
-    title: "E-commerce Platform",
-    madeAt: "Digital Agency",
-    builtWith: ["Next.js", "Shopify API", "TypeScript", "Tailwind CSS"],
-    url: "#",
-    githubUrl: null,
-  },
-  {
-    year: "2022",
-    title: "Fintech Analytics Dashboard",
-    madeAt: "Digital Agency",
-    builtWith: ["React", "D3.js", "Node.js", "MongoDB"],
-    url: null,
-    githubUrl: null,
-  },
-  {
-    year: "2021",
-    title: "Payment Gateway Integration",
-    madeAt: "Digital Agency",
-    builtWith: ["Node.js", "Stripe", "Express.js", "PostgreSQL"],
-    url: null,
-    githubUrl: "#",
-  },
-  {
-    year: "2021",
-    title: "DevMetrics Dashboard",
-    madeAt: "Digital Agency",
-    builtWith: ["React", "TypeScript", "GitHub API", "Recharts"],
-    url: "#",
-    githubUrl: "#",
-  },
-  {
-    year: "2020",
-    title: "RESTful API Suite",
-    madeAt: "Software House",
-    builtWith: ["Express.js", "MySQL", "JWT", "Swagger"],
-    url: null,
-    githubUrl: "#",
-  },
-  {
-    year: "2020",
-    title: "Open-source CLI Toolkit",
-    madeAt: "Personal",
-    builtWith: ["JavaScript", "Node.js", "Commander.js"],
-    url: null,
-    githubUrl: "#",
+    year: "2025",
+    title: "Xpanse.ai — Multi-Agent Campaign Intelligence",
+    madeAt: "Hackathon",
+    builtWith: ["LangGraph", "Amazon Bedrock", "RAG", "Tavily", "Streamlit"],
+    url: "/projects/xpanse",
+    githubUrl: "https://github.com/SAURABHSIN996/Xpanse.ai",
   },
 ];
 
@@ -142,9 +54,9 @@ export default function ArchivePage() {
 
       {/* Header */}
       <header className="archive-header">
-        <h1 className="archive-title">All Projects</h1>
+        <h1 className="archive-title">Projects</h1>
         <p className="archive-sub">
-          A chronological archive of things I&rsquo;ve built — from production systems to experiments.
+          The work I build and ship &mdash; with the engineering decisions behind it. More in progress.
         </p>
       </header>
 

@@ -1,77 +1,43 @@
 import Link from "next/link";
-import { TechStack } from "@/components/tech-stack";
 import { SectionNav } from "@/components/section-nav";
-import { MouseGradient } from "@/components/mouse-gradient";
 import { getPosts } from "@/lib/cms";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const experiences = [
   {
-    period: "2023 — Present",
-    role: "Senior Full Stack Developer",
-    company: "Tech Startup",
-    companyUrl: "#",
+    period: "Aug 2023 — Present",
+    role: "Software Engineer",
+    company: "Epsilon",
+    companyUrl: "https://www.epsilon.com",
     bullets: [
-      "Architected multi-agent AI pipelines handling 50k+ daily tasks using LangGraph and Python",
-      "Built and scaled a multi-tenant SaaS platform with Next.js, FastAPI, and PostgreSQL",
-      "Reduced LLM inference costs by 40% through prompt caching and streaming optimisations",
+      "Architected a multi-agent code review platform on n8n — orchestrating four specialized agents (security, fraud, code quality, test coverage) with stateful session tracking and automated report generation, wired directly into the Azure DevOps CI/CD pipeline",
+      "Built an AI campaign-script automation pipeline with n8n, AWS Bedrock (Claude), and the Azure DevOps API, cutting script deployment from 60 minutes to under 2 — with human-in-the-loop approval gates and automated Git PR creation",
+      "Re-architected critical backend API endpoints, rewriting core logic and hardening exception handling to significantly cut response latency and eliminate a class of production errors",
+      "Delivered an end-to-end Private Label Credit Card (PLCC) payment integration that opened a new transaction path and directly grew revenue",
     ],
-    tags: ["Next.js", "Python", "LangGraph", "PostgreSQL", "Docker"],
+    tags: ["Java", "n8n", "AWS Bedrock", "PostgreSQL", "Azure DevOps"],
   },
   {
-    period: "2021 — 2023",
-    role: "Full Stack Developer",
-    company: "Digital Agency",
-    companyUrl: "#",
+    period: "Feb 2023 — Aug 2023",
+    role: "Software Engineer Intern",
+    company: "Epsilon",
+    companyUrl: "https://www.epsilon.com",
     bullets: [
-      "Delivered 15+ client projects across fintech, e-commerce, and media verticals",
-      "Introduced TypeScript and component architecture that cut production bug rate by 60%",
-      "Engineered real-time collaboration features using WebSockets and React Query",
+      "Migrated the entire codebase from legacy Azure Repos to Git and stood up Azure Pipelines CI/CD with automated unit testing, sharply reducing manual-deployment errors and turnaround time",
+      "Built a customer referral program end-to-end in a .NET enterprise solution, driving measurable growth in referrals and downstream sales",
     ],
-    tags: ["React", "Node.js", "TypeScript", "MongoDB", "AWS"],
-  },
-  {
-    period: "2020 — 2021",
-    role: "Junior Developer",
-    company: "Software House",
-    companyUrl: "#",
-    bullets: [
-      "Developed REST APIs and integrated third-party payment gateways for e-commerce clients",
-      "Contributed to open-source tooling used by 2,000+ developers on GitHub",
-    ],
-    tags: ["JavaScript", "Express.js", "MySQL", "REST APIs"],
+    tags: [".NET", "Azure Pipelines", "Git", "CI/CD"],
   },
 ];
 
 const projects = [
   {
-    title: "AI Research Agent",
+    title: "Xpanse.ai — Multi-Agent Campaign Intelligence",
     description:
-      "Multi-agent pipeline that autonomously researches topics, synthesises findings across sources, and produces structured reports with citations. Built on LangGraph with a streaming UI.",
-    tags: ["LangGraph", "Python", "OpenAI API", "Pinecone"],
-    url: "#",
-  },
-  {
-    title: "Workflow Automation Platform",
-    description:
-      "Full-stack SaaS for building and deploying agentic business workflows — visual editor, real-time task monitoring, webhook integrations, and role-based access.",
-    tags: ["Next.js", "FastAPI", "PostgreSQL", "LangChain"],
-    url: "#",
-  },
-  {
-    title: "AI Adoption Toolkit",
-    description:
-      "Internal tooling that helps enterprises audit, prototype, and deploy LLM integrations with minimal disruption to existing products and workflows.",
-    tags: ["TypeScript", "Anthropic Claude", "Node.js", "Docker"],
-    url: "#",
-  },
-  {
-    title: "Portfolio & Blog",
-    description:
-      "This site — ISR-powered with Strapi CMS, Pagefind static search, Giscus comments, and Vercel edge deployment. Sub-100ms loads.",
-    tags: ["Next.js", "Strapi", "Vercel", "Pagefind"],
-    url: "/",
+      "A production-grade marketing intelligence platform on LangGraph and Amazon Bedrock. Seven specialized agents run across two checkpointed pipelines — strategy generation and cultural content transcreation — grounded in RAG over dual Knowledge Bases, validated with live web search (Tavily), and gated by human-in-the-loop review at every strategic decision.",
+    tags: ["LangGraph", "Amazon Bedrock", "RAG", "Tavily", "Streamlit"],
+    url: "/projects/xpanse",
   },
 ];
 
@@ -145,10 +111,10 @@ function Tag({ label }: { label: string }) {
 export default async function HomePage() {
   const posts = await getPosts();
   const latestPosts = posts.slice(0, 5);
+  const hasWriting = latestPosts.length > 0;
 
   return (
     <div className="port-layout">
-      <MouseGradient />
 
       {/* ── LEFT PANEL ── */}
       <aside className="port-left">
@@ -160,10 +126,10 @@ export default async function HomePage() {
           </h1>
           <p className="port-title">Full Stack Developer<br />& AI Engineer</p>
           <p className="port-tagline">
-            I build intelligent systems that reason, adapt, and act — from LLM pipelines to production-scale web products.
+            I build enterprise-grade applications and integrate production-ready, autonomous AI agents into secure backends.
           </p>
 
-          <SectionNav />
+          <SectionNav hasWriting={hasWriting} />
         </div>
 
         {/* Social links */}
@@ -190,13 +156,10 @@ export default async function HomePage() {
         <section id="about" className="port-section scroll-mt-20">
           <div className="about-body">
             <p>
-              I&rsquo;m a full-stack developer and AI engineer focused on building intelligent systems that solve real problems. My work sits at the intersection of robust software engineering and applied machine learning — particularly the orchestration layer where LLMs meet production.
+              I&rsquo;m a full-stack developer and AI engineer focused on bridging the gap between bleeding-edge AI models and robust, enterprise-scale software architecture. While the industry is flooded with fragile Python prototypes, my focus is production. I specialize in building highly scalable backends, using <strong>Java</strong>, <strong>Postgres</strong>, <strong>LangChain</strong>, and <strong>n8n</strong> to automate complex, multi-step business workflows that remain deterministic and predictable at scale.
             </p>
             <p>
-              My current obsession is <strong>agentic architecture</strong> — not just wiring up API calls, but designing the reasoning loops, evaluation systems, and human-in-the-loop patterns that make AI reliable at scale. I&rsquo;ve shipped everything from research automation tools to enterprise-grade workflow platforms.
-            </p>
-            <p>
-              Outside of code, I write about the things I&rsquo;m actively figuring out — systems design, AI product philosophy, and the craft of building things that actually get used.
+              My approach to <strong>agentic architecture</strong> focuses heavily on state synchronization, rigorous error-handling, data consistency, and human-in-the-loop guardrails. I design AI systems built to operate safely in real-world business environments &mdash; not just inside a terminal.
             </p>
           </div>
         </section>
@@ -242,9 +205,9 @@ export default async function HomePage() {
           <p className="port-section-label">Projects</p>
           <div className="projects-grid">
             {projects.map((project) => (
-              <a key={project.title} href={project.url} className="project-card">
+              <Link key={project.title} href={project.url} className="project-card">
                 <div className="project-top">
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#64ffda" strokeWidth="1.5" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1f1d1a" strokeWidth="1.5" aria-hidden="true">
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                   </svg>
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" className="project-arrow" aria-hidden="true">
@@ -256,7 +219,13 @@ export default async function HomePage() {
                 <div className="tag-row">
                   {project.tags.map((t) => <Tag key={t} label={t} />)}
                 </div>
-              </a>
+                <span className="project-cta">
+                  Read the case study
+                  <svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                    <path d="M2.5 6h7M6 2.5 9.5 6 6 9.5" />
+                  </svg>
+                </span>
+              </Link>
             ))}
           </div>
           <Link href="/archive" className="resume-link" style={{ marginTop: "20px" }}>
@@ -267,27 +236,17 @@ export default async function HomePage() {
           </Link>
         </section>
 
-        {/* STACK */}
-        <section id="stack" className="port-section scroll-mt-20">
-          <p className="port-section-label">Stack</p>
-          <p className="port-section-sub">Technologies I reach for across different layers of a system.</p>
-          <TechStack />
-        </section>
-
-        {/* WRITING */}
-        <section id="writing" className="port-section scroll-mt-20">
-          <div className="writing-hd">
-            <p className="port-section-label" style={{ marginBottom: 0 }}>Writing</p>
-            <Link href="/blog" className="all-posts-link">All posts →</Link>
-          </div>
-          <p className="port-section-sub">Thoughts on AI systems, engineering, and building things that matter.</p>
-
-          {latestPosts.length === 0 ? (
-            <div className="empty-posts">
-              <p className="empty-label">// posts incoming</p>
-              <p className="empty-msg">Writing is coming soon — check back shortly.</p>
+        {/* WRITING — rendered only when at least one post is published */}
+        {hasWriting && (
+          <section id="writing" className="port-section scroll-mt-20">
+            <div className="writing-hd">
+              <p className="port-section-label" style={{ marginBottom: 0 }}>Writing</p>
+              <Link href="/blog" className="all-posts-link">All posts →</Link>
             </div>
-          ) : (
+            <p className="port-section-sub">
+              Field notes on production AI — agent reliability, state management, and building enterprise backends that don&rsquo;t break.
+            </p>
+
             <div className="posts-list">
               {latestPosts.map((post) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`} className="post-row">
@@ -296,8 +255,8 @@ export default async function HomePage() {
                 </Link>
               ))}
             </div>
-          )}
-        </section>
+          </section>
+        )}
 
       </main>
     </div>

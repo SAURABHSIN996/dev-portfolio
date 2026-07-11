@@ -2,21 +2,23 @@
 
 import { useEffect, useState } from "react";
 
-const SECTIONS = [
+const BASE_SECTIONS = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
-  { id: "stack", label: "Stack" },
-  { id: "writing", label: "Writing" },
 ];
 
-export function SectionNav() {
+export function SectionNav({ hasWriting = false }: { hasWriting?: boolean }) {
   const [active, setActive] = useState("about");
   const [hovered, setHovered] = useState<string | null>(null);
 
+  const sections = hasWriting
+    ? [...BASE_SECTIONS, { id: "writing", label: "Writing" }]
+    : BASE_SECTIONS;
+
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
-    SECTIONS.forEach(({ id }) => {
+    sections.forEach(({ id }) => {
       const el = document.getElementById(id);
       if (!el) return;
       const obs = new IntersectionObserver(
@@ -29,11 +31,11 @@ export function SectionNav() {
       observers.push(obs);
     });
     return () => observers.forEach((o) => o.disconnect());
-  }, []);
+  }, [hasWriting]);
 
   return (
     <nav className="mt-12 flex flex-col" aria-label="Page sections">
-      {SECTIONS.map(({ id, label }) => {
+      {sections.map(({ id, label }) => {
         const isActive = active === id;
         const isHovered = hovered === id && !isActive;
         return (
@@ -48,8 +50,8 @@ export function SectionNav() {
               style={{
                 display: "block",
                 height: "1px",
-                width: isActive ? "40px" : isHovered ? "28px" : "18px",
-                backgroundColor: isActive ? "#64ffda" : isHovered ? "#c8c8c8" : "#555555",
+                width: isActive ? "56px" : isHovered ? "32px" : "20px",
+                backgroundColor: isActive ? "#1f1d1a" : isHovered ? "#8f8b81" : "#cbc4b4",
                 transition: "width 300ms, background-color 300ms",
               }}
             />
@@ -57,9 +59,9 @@ export function SectionNav() {
               style={{
                 fontFamily: "var(--font-sans)",
                 fontSize: "13px",
-                fontWeight: "500",
+                fontWeight: isActive ? "600" : "500",
                 letterSpacing: "0.01em",
-                color: isActive ? "#64ffda" : isHovered ? "#f0f0f0" : "#a0a0a0",
+                color: isActive ? "#1f1d1a" : isHovered ? "#1f1d1a" : "#6f6b63",
                 transition: "color 200ms",
               }}
             >
