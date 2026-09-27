@@ -1,10 +1,10 @@
 # DevPortfolio — Project Architecture
 
-## Your Understanding (Correct)
+## Architecture overview
 
-> Next.js frontend hosted on Vercel → connected to Strapi CMS hosted on Railway → Strapi connected to PostgreSQL hosted on Supabase.
+Next.js on Vercel → Strapi CMS on Railway → PostgreSQL on Supabase.
 
-That is exactly right. Each service has one job and talks only to what it needs to.
+Shared coding instructions are in [AGENTS.md](AGENTS.md). The current content schema and cache behavior are documented in [docs/cms-schema.md](docs/cms-schema.md). Hosting details below describe the documented deployment; they are not a live service health check.
 
 ---
 
@@ -94,7 +94,7 @@ Next.js regenerates the blog index and post page
 by fetching fresh data from Strapi
          │
          ▼
-New post is live on the site within seconds
+Affected content regenerates on subsequent requests
 ```
 
 ---
@@ -111,7 +111,7 @@ New post is live on the site within seconds
 - **What it is:** A random 64-character hex string used to verify that webhook requests genuinely came from Strapi
 - **Where it lives:** `STRAPI_WEBHOOK_SECRET` in `.env.local`, Vercel env vars, and Strapi webhook headers
 - **How it's used:** Strapi sends it as `x-strapi-secret` header; Vercel checks it before revalidating
-- **Value:** `31f6bbb2abf2d166436018f029e69060d35b90612a69b2699d4e1fbffb034d1a`
+- **Value:** Store only in environment settings and the Strapi webhook configuration; never in documentation.
 
 ### 3. Vercel Protection Bypass Token
 - **What it is:** A token that lets automated services (like Strapi) bypass Vercel's deployment authentication
@@ -180,7 +180,7 @@ New post is live on the site within seconds
 Pages are not rebuilt on every request. Instead:
 - Pages are built once and cached on Vercel's CDN
 - They automatically refresh every **1 hour** (`revalidate: 3600`)
-- They refresh **instantly** when Strapi fires a webhook (on publish/update/delete)
+- Webhook events invalidate the relevant cache tags; affected content regenerates on subsequent requests
 - This means the site is always fast (serving cached HTML) but content stays up to date
 
 ---
@@ -192,3 +192,19 @@ Pages are not rebuilt on every request. Instead:
 | Contact form | Removed to avoid dependency on Resend (email) and Upstash Redis (rate limiting) |
 | Umami Analytics | Optional — can be added by setting `NEXT_PUBLIC_UMAMI_WEBSITE_ID` in Vercel |
 | Giscus Comments | Optional — can be added by setting 4 Giscus env vars in Vercel |
+
+
+## Local development
+
+Use `npm ci`, copy `.env.local.example` to `.env.local` if needed, and supply your own environment values. Run `npm run dev` to start Next.js. Never overwrite an existing local environment file during setup.
+
+Run `npx tsc --noEmit --incremental false` for type checking. `npm run lint` currently fails with an ESLint circular-configuration error; production builds skip lint through `next.config.ts`. `npm run build` runs Next.js and then Pagefind against `.next`. There is no automated test suite configured.
+
+## Implementation boundaries
+
+- Portfolio and case-study content is maintained in source; blog content comes from Strapi.
+- Pagefind browser assets are not yet loaded by the search component, and webhook revalidation does not rebuild its index.
+- Draft mode enables a cookie, but the CMS client does not yet fetch drafts.
+- The layout has no theme provider. It loads Umami only when configured; Giscus is optional.
+- CMS fetch errors are returned as empty results. Lists currently use the backend default page size of 25.
+- A résumé link exists, but its PDF is absent from this repository.
